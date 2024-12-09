@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Summary Viewer</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Website Summary Viewer</h1>
+            <form method="get" action="/">
+                <input type="url" name="url" placeholder="Enter website URL" required>
+                <button type="submit">Load</button>
+            </form>
+        </header>
+        <div class="grid">
+            <!-- Left Column: Summary -->
+            <div class="left">
+                <h2>Summary</h2>
+                {% if summary %}
+                <p>{{ summary }}</p>
+                {% else %}
+                <p>Enter a URL to load and summarize its content.</p>
+                {% endif %}
+            </div>
+
+            <!-- Middle Column: Website View -->
+            <div class="middle">
+                <h2>Website Preview</h2>
+                {% if url %}
+                <iframe src="{{ url }}" frameborder="0"></iframe>
+                {% else %}
+                <p>No website loaded.</p>
+                {% endif %}
+            </div>
+
+            <!-- Right Column: Links -->
+            <div class="right">
+                <h2>Links</h2>
+                {% if links %}
+                <ul>
+                    {% for link in links %}
+                    <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No links to display.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
